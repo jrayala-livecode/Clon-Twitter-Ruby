@@ -21,6 +21,10 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 gem 'devise'
 
+gem 'ransack'
+
+gem 'kaminari'
+
 group :development, :test do
   gem 'sqlite3'  
   
