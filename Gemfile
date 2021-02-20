@@ -25,6 +25,8 @@ gem 'ransack'
 
 gem 'kaminari'
 
+gem 'bootstrap'
+
 group :development, :test do
   gem 'sqlite3'  
   

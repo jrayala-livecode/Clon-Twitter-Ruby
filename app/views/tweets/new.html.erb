@@ -1,0 +1,13 @@
+
+
+
+<div class="card mt-2 bg-secondary text-white">
+    <h1 class="p-2">Nuevo tweet</h1>
+    <div class="card-body">
+    <%= form_with model: @tweet do |form| %>
+        <div class="form-group">
+            <%= form.text_field :contents, class:'form-control' %>
+        </div>
+  <%= form.submit "Crear tweet", class:'btn btn-primary' %>
+<% end %>
+</div>

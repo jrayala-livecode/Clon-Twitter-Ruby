@@ -1,0 +1,46 @@
+
+<div class="card mb-4">
+    <div class="card-body">
+        <%= @tweet.contents %>
+    </div>
+    <div class="card-footer">
+        <b>Creado por:</b> <%= @tweet.user.user_name %> <b> a las </b> <%= @tweet.created_at %>
+        <div class="float-right btn-group">
+            <% if @tweet.user == current_user %>
+                <%= link_to "Eliminar", @tweet , method: :delete, class: 'btn btn-danger', data: {confirm: '¿Estás seguro?'} %>
+            <% end %>
+        </div>
+        <div class="card mt-5">
+            
+            <%= form_with model: @retweet, url: tweets_retweet_path, method: 'post' do |form| %>
+            <div class="card-body">
+                <div class="form-group">
+                    <%= form.text_field :tweet_id, value: @tweet.id, class:'d-none' %>
+                </div>
+                <div class="form-group">
+                    <%= form.text_field :contents, class:'form-control' %>
+                </div>
+                <div class="form-group">
+                    <%= form.submit "Retweetear", class:'btn btn-primary' %>
+                </div>
+            </div>
+            <% end%>
+        </div>
+    </div>
+    <% @retweets.each do |t| %>
+    <div class="card mb-4">
+        <div class="card-body">
+            <%= t.contents %>
+        </div>
+        <div class="card-footer">
+            <b>Creado por:</b> <%= t.user.user_name %> <b> a las </b> <%= t.created_at %>
+            <div class="float-right btn-group">
+                <% if t.user == current_user %>
+                    <%= link_to "Eliminar", t , method: :delete, class: 'btn btn-danger', data: {confirm: '¿Estás seguro?'} %>
+                    <%= link_to "Ver retweets", t , method: :get, class: 'btn btn-info' %>
+                <% end %>
+            </div>
+        </div>
+    </div>
+<% end%>
+</div>

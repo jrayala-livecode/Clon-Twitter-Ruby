@@ -1,0 +1,43 @@
+<h1 class="text-center">Últimos Tweets</h1>
+
+<%= link_to "Crear tweet", new_tweet_path, class: 'btn btn-success w-100 mt-5 mb-5' %>
+<% flash.each do |type, msg| %>
+  <% if type == 'success' %>
+    <div class="alert alert-success" role="alert">
+        <%= msg %>
+    </div> 
+  <% end %>
+  <% if type == 'error' %>
+    <div class="alert alert-danger" role="alert">
+        <%= msg %>
+    </div> 
+  <% end %>
+<% end %>
+<%= link_to_prev_page @tweets, 'Previous Page' %>
+<%= link_to_next_page @tweets, 'Next Page' %>
+<%= rel_next_prev_link_tags @tweets %>
+<%= paginate @tweets, left: 1, right: 3 %>
+<% @tweets.each do |t| %>
+    <div class="card mb-4">
+        <div class="card-body">
+            <div class="row align-items-center">
+                <div class="col-2"><img src="<%= url_for(t.user.avatar) if t.user.avatar.attached? %>" alt="" style="width: 120px;"></div>
+                <div class="col-10 align-content-center"><p class=""><%= t.contents %></p></div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <b>Creado por:</b> <%= t.user.user_name %> <b> hace </b>  <%= link_to time_ago_in_words(t.created_at), tweet_likes_path(t.id) %>
+            <div class="float-right btn-group">
+                <% if user_signed_in? %>
+                    <%= link_to "Me gusta "+t.likes.count.to_s, tweet_likes_path(t) , method: :post, class: 'btn btn-primary' %>
+                <% end %>
+                <%= link_to "Ver retweets", t , method: :get, class: 'btn btn-info' %>
+                <% if t.user == current_user %>
+                    
+                    <%= link_to "Eliminar", t , method: :delete, class: 'btn btn-danger', data: {confirm: '¿Estás seguro?'} %>
+                <% end %>
+            </div>
+        </div>
+    </div>
+<% end%>
+<% paginate @tweets %>
