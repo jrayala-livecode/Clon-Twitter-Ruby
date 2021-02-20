@@ -37,7 +37,7 @@
             <div class="float-right btn-group">
                 <% if t.user == current_user %>
                     <%= link_to "Eliminar", t , method: :delete, class: 'btn btn-danger', data: {confirm: '¿Estás seguro?'} %>
-                    <%= link_to "Ver retweets", t , method: :get, class: 'btn btn-info' %>
+                    <%= link_to raw('Retwittear <i class="fas fa-retweet"></i>'), t , method: :get, class: 'btn btn-info' %>
                 <% end %>
             </div>
         </div>
