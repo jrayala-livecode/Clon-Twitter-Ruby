@@ -4,7 +4,6 @@ class Tweet < ApplicationRecord
 
     belongs_to :user
     has_many :likes
+
     has_many :tweets
-    belongs_to :tweets, optional: true
-    
 end
