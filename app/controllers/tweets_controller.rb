@@ -1,10 +1,15 @@
 class TweetsController < ApplicationController
   
   before_action :authenticate_user!, :except => [:index]
+  
 
   def index
-    @tweets = Tweet.page(params[:page]).per(50)
-
+    if user_signed_in?
+      @tweets = Tweet.tweets_for_me(current_user.id).page(params[:page]).per(50)
+      ##@tweets = Tweet.all.page(params[:page]).per(50)
+    else
+      @tweets = Tweet.all.page(params[:page]).per(50)
+    end
   end
 
   def new
@@ -14,7 +19,6 @@ class TweetsController < ApplicationController
   def show
     @tweet = Tweet.find(params[:id])
     @retweets = Tweet.where("tweet_id = ?", params[:id])
-
     @retweet = Tweet.new
   end
 

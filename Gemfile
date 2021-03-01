@@ -27,6 +27,8 @@ gem 'kaminari'
 
 gem 'bootstrap'
 
+gem 'activeadmin'
+
 group :development, :test do
   gem 'sqlite3'  
   
