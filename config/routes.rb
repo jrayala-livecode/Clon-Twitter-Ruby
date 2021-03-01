@@ -6,7 +6,9 @@ Rails.application.routes.draw do
   end
 
   devise_for :users
-  
+
+  get 'tweets/hashtags/:hashtag', to: 'tweets#hashtags'
+
   post 'tweets/retweet'
 
   get 'friends/follow'

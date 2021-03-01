@@ -12,6 +12,13 @@ class TweetsController < ApplicationController
     end
   end
 
+  def hashtags
+    hashtag = params[:hashtag].to_str.chomp
+    @tweets = Tweet.where('hashtags like ? ', "%##{hashtag}%").page(params[:page]).per(50)
+    render 'tweets/index'
+  end
+
+
   def new
     @tweet = Tweet.new
   end

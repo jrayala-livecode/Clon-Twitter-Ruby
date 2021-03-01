@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_25_182229) do
+ActiveRecord::Schema.define(version: 2021_03_01_161657) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -77,16 +77,8 @@ ActiveRecord::Schema.define(version: 2021_02_25_182229) do
     t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
-  create_table "tweets", force: :cascade do |t|
-    t.string "contents"
-    t.integer "retweet"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "user_id"
-    t.integer "tweet_id"
-    t.index ["tweet_id"], name: "index_tweets_on_tweet_id"
-    t.index ["user_id"], name: "index_tweets_on_user_id"
-  end
+# Could not dump table "tweets" because of following StandardError
+#   Unknown type 'array' for column 'hashtags'
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
